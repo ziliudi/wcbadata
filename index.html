@@ -1,0 +1,1069 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>中国女子篮球联赛</title>
+    <link rel="shortcut icon" href="/r/cms/www/default/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/r/cms/www/default/css/cba/element-ui@2.9.1.css">
+    <link rel="stylesheet" href="/r/cms/www/default/css/cba/player_index.css" />
+</head>
+<body>
+<!--header头部-->
+<link rel="stylesheet" href="/r/cms/www/default/css/browserTip.css" />
+<div id="browserTip_toast" onclick="closeTip()">
+    <div class="browserTip_pop"></div>
+    <i class="browserTip_bg"></i>
+    <p class="browserTip_font">建议使用Chrome、Firefox、IE浏览器最新版本获得更佳观览体验</p>
+    <p class="browserTip_ido">我知道了</p>
+</div>
+<script src="/r/cms/www/default/js/youthsports/localStorage.js"></script>
+<script type="text/javascript">
+    var url = window.location.search; //获取url中"?"符后的字串 
+    var theRequest = {}; 
+    if (url.indexOf("?") != -1) { 
+    var str = url.substr(1); 
+    strs = str.split("&"); 
+        for(var i = 0; i < strs.length; i ++) { 
+            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+        } 
+    }
+    window.theRequest = theRequest;
+    if(window.theRequest&&window.theRequest.appHideHeaderFooter){
+        function loadCssCode(code){
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.rel = 'stylesheet';
+            try{
+                //for Chrome Firefox Opera Safari
+                style .appendChild(document.createTextNode(code));
+            }catch(ex){
+                //for IE
+                style.styleSheet.cssText = code;
+            }
+            var head = document.getElementsByTagName('head')[0];
+            head.appendChild(style);
+        }
+        loadCssCode('#header #menuOpenIcon, #header .logo .search_icon, #header .header_main .back_home_mobile, #header .menu, .footer-wrap{display: none !important} #mobile #header.youthType {height: 1.36rem} #mobile .header_main .header_abs{ background-color: #131212; } #mobile .cms-info .cms-desc .cms-date{left:0} #mobile .cms-info .cate-name{display:none} #mobile .cms-info .cbaapp.cate-name{display:block !important} #mobile .cms-info .cms-desc .cms-datess{display:none !important}');
+    }
+</script>
+<script type="text/javascript">
+(function (doc, win) {
+win.menuMaskOpenFlag = -1
+var UserAgent = {
+    userAgent:window.navigator.userAgent,
+    // android:function()
+    // {
+    //     alert(this.useragent.indexOf("android"));
+    //     return (this.useragent.indexOf("android") >=0);
+    // },
+    // iphone:function()
+    // {
+    //     return (this.useragent.indexOf("iphone") >=0);
+    // },
+    ipad:function(){
+        return (this.userAgent.indexOf("ipad") >-1);
+    },
+    mobile:function() {
+    　　return (this.userAgent.indexOf("Android") >-1) || (this.userAgent.indexOf("iPhone") >-1);
+    },
+    computerSys: function(){
+        // console.log(this.userAgent)
+      var isMac = this.userAgent.indexOf("Mac OS X") > -1; //判断是否是mac电脑||苹果手机
+      if(isMac){
+        return 'mac'
+      }else{
+        return 'win'
+      }
+    },
+    browserType:function(){  //判断当前pc浏览类型 
+        var userAgent = window.navigator.userAgent; //取得浏览器的userAgent字符串 
+        // console.log(userAgent)
+        var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器 
+        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器 
+        var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器 
+        var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器 
+        var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器 
+        var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器 
+        // var regStr_opera = /Opera\/[\d.]+/gi;  //内核是chrome
+        var regStr_ff = /Firefox\/[\d.]+/gi;
+        var regStr_chrome = /Chrome\/[\d.]+/gi ;
+        var regStr_saf = /Version\/[\d.]+/gi ;
+        if (isIE){ 
+            var reIE = new RegExp("MSIE (\\d+\\.\\d+);"); 
+            reIE.test(userAgent); 
+            var fIEVersion = parseFloat(RegExp["$1"]); 
+            // if(fIEVersion == 7) 
+            // { return "IE7";} 
+            // else if(fIEVersion == 8) 
+            // { return "IE8";} 
+            // else if(fIEVersion == 9) 
+            // { return "IE9";} 
+            // else if(fIEVersion == 10) 
+            // { return "IE10";} 
+
+            //ie11没有 MSIE，但是有Trident；所以ie里面只放过ie11其他都false
+            return false //IE版本过低 
+        }//isIE end 
+            
+        // if (isFF) {
+        //     var v = userAgent.match(regStr_ff)[0].split('/')[1].split('.')[0];
+        //     if(Number(v)>=62){
+        //         return true
+        //     }else{
+        //         return false
+        //     }
+        // } 
+
+        // if (isSafari) {
+        //     var v = userAgent.match(regStr_saf)[0].split('/')[1].split('.')[0];
+        //     if(Number(v)>=10){
+        //         return true
+        //     }else{
+        //         return false
+        //     }
+        // } 
+        // if (isChrome) {   //chrom opera uc急速 搜狗 360极速 360安全浏览器
+        //     var v = userAgent.match(regStr_chrome)[0].split('/')[1].split('.')[0];
+        //     if(Number(v)>=65){
+        //         return true
+        //     }else{
+        //         return false
+        //     }
+            
+        // } 
+        // if (isEdge) {return true;} 
+
+        return true  //默认 return true; true 支持; false:不支持
+    }
+};
+
+var computerSys = UserAgent.computerSys();
+doc.body.className = computerSys;
+
+win.env_terminal = '';   //判断终端
+if(UserAgent.ipad()){
+  win.env_terminal = 'ipad';
+  doc.body.id = win.env_terminal;
+}else if(UserAgent.mobile()){
+  win.env_terminal = 'mobile';
+  doc.body.id = env_terminal;
+}else{
+  win.env_terminal = 'pc';
+  if(!UserAgent.browserType()){
+    // console.log('browserTip:',window.localStorage.getItem('browserTip'))
+    if(!window.localStorage.getItem('browserTip')){
+      doc.getElementById('browserTip_toast').style.display = 'block';
+    }
+    win.closeTip = function(){
+      window.localStorage.setItem('browserTip', true)
+      doc.getElementById('browserTip_toast').style.display = 'none';
+    }
+    // console.log('浏览器版本太低')
+  }else{
+    // console.log('浏览器版本正常')     
+  }
+ 
+}
+libFlexible(win)
+function libFlexible(win){
+    var doc = win.document;
+    var docEl = doc.documentElement;
+    var metaEl = doc.querySelector('meta[name="viewport"]');
+    var flexibleEl = doc.querySelector('meta[name="flexible"]');
+    var dpr = 0;
+    var scale = 0;
+    var tid;
+    win.flexible = {};
+
+    if (metaEl) {
+        // console.warn('将根据已有的meta标签来设置缩放比例');
+        var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+        if (match) {
+            scale = parseFloat(match[1]);
+            dpr = parseInt(1 / scale);
+        }
+    } else if (flexibleEl) {
+        var content = flexibleEl.getAttribute('content');
+        if (content) {
+            var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+            var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+            if (initialDpr) {
+                dpr = parseFloat(initialDpr[1]);
+                scale = parseFloat((1 / dpr).toFixed(2));
+            }
+            if (maximumDpr) {
+                dpr = parseFloat(maximumDpr[1]);
+                scale = parseFloat((1 / dpr).toFixed(2));
+            }
+        }
+    }
+
+    if (!dpr && !scale) {
+        var isAndroid = win.navigator.appVersion.match(/android/gi);
+        var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+        var devicePixelRatio = win.devicePixelRatio;
+        if (isIPhone) {
+            // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+            if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                dpr = 3;
+            } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)){
+                dpr = 2;
+            } else {
+                dpr = 1;
+            }
+        } else {
+            // 其他设备下，仍旧使用1倍的方案
+            dpr = 1;
+        }
+        scale = 1 / dpr;
+    }
+
+    docEl.setAttribute('data-dpr', dpr);
+    if (!metaEl) {
+        metaEl = doc.createElement('meta');
+        metaEl.setAttribute('name', 'viewport');
+        metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+        if (docEl.firstElementChild) {
+            docEl.firstElementChild.appendChild(metaEl);
+        } else {
+            var wrap = doc.createElement('div');
+            wrap.appendChild(metaEl);
+            doc.write(wrap.innerHTML);
+        }
+    }
+
+    function refreshRem(){
+        var width = docEl.getBoundingClientRect().width;
+        var UserAgent = {
+              userAgent:window.navigator.userAgent,
+              ipad:function(){
+                  return (this.userAgent.indexOf("ipad") >-1);
+              },
+              mobile:function() {
+              　　return (this.userAgent.indexOf("Android") >-1) || (this.userAgent.indexOf("iPhone") >-1);
+              }
+        }
+        if(UserAgent.mobile()){
+            win.env_terminal = 'mobile';
+            doc.body.id = win.env_terminal;
+
+        }
+        // else if(UserAgent.ipad()){ ipad和pc一样
+        //   win.env_terminal = 'ipad';
+        //   doc.body.id = win.env_terminal;
+        // }
+        else{
+            win.env_terminal = 'pc';
+            doc.body.id = 'pc';
+
+        }
+        // console.log('refreshRem:', win.env_terminal)
+        if (width / dpr > 540) {
+            width = 540 * dpr;
+          }
+        // console.log('width:',width)
+        var rem = width / 10;
+        docEl.style.fontSize = rem + 'px';
+        // console.log('rem:',rem)
+        win.flexible.rem = win.rem = rem;
+    }
+
+    win.addEventListener('resize', function() {
+        clearTimeout(tid);
+        tid = setTimeout(refreshRem, 200);
+    }, false);
+
+    if (doc.readyState === 'complete') {
+        doc.body.style.fontSize = 12 * dpr + 'px';
+    } else {
+        doc.addEventListener('DOMContentLoaded', function(e) {
+            doc.body.style.fontSize = 12 * dpr + 'px';
+        }, false);
+    }
+
+
+    refreshRem();
+    win.flexible.dpr = win.dpr = dpr;
+    win.flexible.refreshRem = refreshRem;
+    win.flexible.rem2px = function(d) {
+        var val = parseFloat(d) * this.rem;
+        if (typeof d === 'string' && d.match(/rem$/)) {
+            val += 'px';
+        }
+        return val;
+    }
+    win.flexible.px2rem = function(d) {
+        var val = parseFloat(d) / this.rem;
+        if (typeof d === 'string' && d.match(/px$/)) {
+            val += 'rem';
+        }
+        return val;
+    }
+
+}
+
+// console.log('env_terminal：', win.env_terminal)
+
+})(document, window);
+
+
+window.isShowPopup = function(boolean, pageScrollYoffset) { 
+    var setPageScrollTop = pageScrollYoffset?pageScrollYoffset:window.pageScrollYoffset;
+    var htmlDom = document.getElementsByTagName('html')[0];
+    var bodyDom = document.body;
+    var scrollLoaderBox = document.getElementById('scrollLoader-container');
+    if (boolean === true) {
+        window.pageScrollYoffset_save = setPageScrollTop
+        bodyDom.style.overflow = htmlDom.style.overflow = 'hidden';
+        bodyDom.style.height = htmlDom.style.height = '100%';
+        if(scrollLoaderBox){
+            scrollLoaderBox.style.overflowY = 'hidden'
+        }
+        
+    } else {
+        window.pageScrollYoffset = setPageScrollTop
+        bodyDom.style.overflow = htmlDom.style.overflow = 'auto';
+        bodyDom.style.height = htmlDom.style.height = 'auto';
+        if(scrollLoaderBox){
+            scrollLoaderBox.style.overflowY = 'auto'
+        }
+
+    }
+    // 下面需要这两行代码，兼容不同浏览器
+    bodyDom.scrollTop = setPageScrollTop;
+    window.scrollTo(0, setPageScrollTop);
+}
+
+document.body.onscroll = function(){
+    window.pageScrollYoffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+}
+
+
+var extend = {  //接口域名抽离成全局
+    data: function(){
+        return {
+            apiPort: '/datahub',
+            apiErrMessage: '服务异常，请稍后再试',
+            host: '',
+            gfggLinkBtn: null, //存储 篮协首页 官方公告 dom 对象
+            menuLiArr: [], //存储 篮协导航 li dom对象
+            isWatchScrollEvent: false, //add scroll
+            isMobile: false,  //add scroll
+            viewDPR: 1, //add h5 table
+            isListenScroll: false, //add scroll
+            topLoading: false, //add scroll
+            bottonLoading: false,   //add scroll
+            stopTopLoading: false, //是否停止传播滚动到顶部事件  //add scroll
+            stopBottonLoading: false,  //是否停止传播滚动到底部事件 //add scroll
+            containerScrollTop: 0,
+            stationPathArr:[
+                {
+                    name: 'cbaAlike',
+                    arr:['cba','wcba','nbl','cuba', 'Super3']
+                },{
+                    name: 'youthAlike',
+                    arr:['youth','qgydh','qgnljbs']
+                }
+            ],
+            stationPathName: 'global' //默认 篮协官网
+        }
+    },
+    created: function(){
+        var location = window.location
+        this.host = location.protocol + '//' + location.host
+        var pathName = location.pathname;
+        this.isMobile = this.UserAgent().mobile()
+        this.viewDPR = window.flexible.dpr
+        this.isStationName(pathName)
+        if(this.stationPathName === 'global'){
+            this.gfggLinkBtn = window.document.getElementById('gfggLink')
+            var menuAllArr = document.getElementById('menuTopMask_ul').childNodes
+            for(var i=0; i<menuAllArr.length; i++){
+                if(menuAllArr[i].nodeType === 1){
+                    this.menuLiArr.push(menuAllArr[i])
+                }
+            }  
+        }
+
+        // console.log('stationPathName:',this.stationPathName)
+        this.watchResize()
+    },
+    methods:{
+        isStationName: function(pathName){
+            for(var i=0; i<this.stationPathArr.length; i++){
+                var item = this.stationPathArr[i]
+                for(var j=0; j<item.arr.length; j++){
+                    var val = item.arr[j]
+                    var reg_str = '/^[\/]'+val+'/ig'
+                    // console.log(pathName, val, eval(reg_str).test(pathName))
+                    if(eval(reg_str).test(pathName)){
+                        this.stationPathName = item.name
+                        return
+                    }
+                }
+            }
+        },
+        initMobileScroll: function(globalScrollGetDataFunc, state, callback){
+            //add scroll
+            this.globalScrollState = state
+            this.globalScrollGetDataFunc = globalScrollGetDataFunc
+            this.isMobile = window.env_terminal === 'mobile'? true : false
+            if(this.isMobile){
+                this.isListenScroll = true
+                this.listenScroll(globalScrollGetDataFunc, state, callback)
+            }
+            this.isWatchScrollEvent = true
+            this.watchResize()
+        },
+        watchResize: function(){
+            var _this = this
+            window.removeEventListener("resize",_this.refreshRem);
+            window.addEventListener('resize', function() {
+                clearTimeout(_this.tid);
+                _this.tid = setTimeout(_this.refreshRem, 300);
+            }, false);
+        },
+        topDone: function(stopTopLoading, state){  //add scroll 传true则再次滚动不会加载
+            var _this = this
+            _this.topLoading = false;
+            if(stopTopLoading) _this.stopTopLoading = true;
+            if(stopTopLoading && state && state === 'init'){
+                _this.stopTopLoading = false;
+            }
+        },
+        bottomDone: function(stopBottonLoading, state){ //add scroll
+            var _this = this
+            _this.bottonLoading = false;
+            if(stopBottonLoading) _this.stopBottonLoading = true;
+            if(stopBottonLoading && state && state === 'init'){
+                _this.stopBottonLoading = false;
+            }
+        },
+        listenScroll: function(globalScrollGetDataFunc, state, callback){ //add scroll
+            // callback 滚动时触发的事件
+            var _this = this;
+            var loaderIconHeight = Math.ceil(window.flexible.rem2px(.8))
+            setTimeout(function(){
+                var scrollContainer = document.getElementById('scrollLoader-container');
+                scrollContainer.onscroll = function(){
+                    if(callback){
+                        callback()
+                    }
+                    // console.log('offsetHeight:',scrollContainer.offsetHeight,   'scrollTop:',scrollContainer.scrollTop, 'scrollHeight:',scrollContainer.scrollHeight)
+                    _this.containerScrollTop = scrollContainer.scrollTop
+                    if(scrollContainer.scrollTop<=0 && !_this.stopTopLoading){
+                        if(_this.topLoading) return;
+                        
+                        _this.topLoading = true;
+                        // _this.$emit('scroll-to-top', topDone);
+                        if(state === 'bottom'){
+                            _this.topDone(true)
+                        }else{
+                            globalScrollGetDataFunc()
+                        }
+                    }
+                    if((scrollContainer.offsetHeight + scrollContainer.scrollTop+1 >= scrollContainer.scrollHeight) && !_this.stopBottonLoading){
+                        if(_this.bottonLoading) return;
+
+                        _this.bottonLoading = true;
+                        scrollContainer.scrollTop += loaderIconHeight;
+                        // _this.$emit('scroll-to-botton', bottomDone);
+                        if(state === 'top'){
+                            _this.bottomDone(true)
+                        }else{
+                            globalScrollGetDataFunc()
+                        }
+                        
+                        
+                    }
+                }
+            }, 50)
+        },
+        UserAgent: function() {
+            return{
+                userAgent:window.navigator.userAgent,
+                ipad:function(){
+                    return (this.userAgent.indexOf("ipad") >-1);
+                },
+                mobile:function() {
+                　　return (this.userAgent.indexOf("Android") >-1) || (this.userAgent.indexOf("iPhone") >-1);
+                }
+            }
+        },
+        refreshRem: function(){  //add scroll
+            var _this = this
+            this.viewDPR = window.flexible.dpr
+            if(this.UserAgent().mobile()){
+                this.isMobile = true;
+                if(this.isWatchScrollEvent&&!this.isListenScroll){
+                    this.listenScroll(this.globalScrollGetDataFunc, this.globalScrollState)
+                }
+                if(this.stationPathName === 'global'){
+                    var menuMaskList = document.querySelector('.menuMaskList')
+                    var menuMaskArr = document.querySelectorAll('.menu-mask')
+                    var colorRedAct = -1
+                    var bgRedAct = -1
+                    
+                    if(menuMaskArr.length === this.menuLiArr.length){
+                        for(var i=0; i<this.menuLiArr.length; i++){
+                            var colorRed = this.menuLiArr[i].firstChild.classList.contains('act')
+                            if(this.menuLiArr[i].classList.contains('act')){
+                                bgRedAct = i
+                                if(window.menuMaskOpenFlag !== 1){
+                                    menuMaskList.style.height = 0;
+                                    menuMaskArr[i].style.display = 'none';
+                                    document.getElementById('menu').style.height = '0';
+
+                                }else{
+                                    
+                                    menuMaskList.style.height = 'calc(100vh - 1.33rem)';
+                                    menuMaskArr[i].style.display = 'block'
+                                }
+                            }
+                            if(colorRed){
+                                colorRedAct = i
+                            }
+                        }
+                        if(colorRedAct === -1){
+                            window.isShowPopup(false)
+                            window.menuMaskOpenFlag = 0
+                            document.getElementById('menuOpenIcon').classList.remove('open')
+                            document.querySelector('#mobile .menu').style.height = 0;
+                            document.querySelector('#mobile .menuMaskList').style.height = 0;
+                        }else{
+                            if(bgRedAct === colorRedAct){
+                                this.menuLiArr[bgRedAct].classList.add('act')
+                            }else{
+                                if(bgRedAct>=0){
+                                    this.menuLiArr[colorRedAct].classList.remove('act')
+                                }else{
+                                    this.menuLiArr[colorRedAct].classList.add('act')
+                                    window.isShowPopup(false)
+                                    window.menuMaskOpenFlag = 0
+                                    document.getElementById('menuOpenIcon').classList.remove('open')
+                                    document.querySelector('#mobile .menu').style.height = 0;
+                                    document.querySelector('#mobile .menuMaskList').style.height = 0;
+                                }
+                            }
+                        }
+                    }
+                    this.gfggLinkBtn.onclick = null
+                }
+            }else{
+                this.isMobile = false;
+                window.isShowPopup(false)
+                if(this.stationPathName === 'global'){
+                    document.getElementById('menu').style.height = 'auto';
+                    if(this.menuLiArr.length){
+                        for(var i=0; i<this.menuLiArr.length; i++){
+                            if(this.menuLiArr[i].classList.contains('act')){
+                                if(window.menuMaskOpenFlag !== 1){
+                                    this.menuLiArr[i].classList.remove('act')
+                                    
+                                }else{
+                                    document.querySelector('.menuMaskList').style.height = '550px';
+                                }
+                            }
+                        }
+                    }
+                    this.gfggLinkBtn.onclick = function(){
+                        window.location.href = _this.host +'/gfgg/index.jhtml'
+                    }
+                }
+            }
+            
+        },
+    }
+}
+</script>
+<link rel="stylesheet" href="/r/cms/www/default/css/cba/common.css" />
+<link rel="stylesheet" href="/r/cms/www/default/css/cba/wcba_self.css" />
+
+<!--header头部-->
+<div id="header">
+    <div class="header_main">
+        <span class="menu_icon" id="menuOpenIcon"><i></i></span>
+        <div class="logo">
+            <img src="/r/cms/www/default/img/cba/wcba_logo.png" alt="" />
+        </div>
+        <div class="head_title">中国女子篮球联赛</div>
+        <a class="back_home_pc" href="https://www.cba.net.cn/">返回官网首页</a>
+        <a class="back_home_mobile" href="https://www.cba.net.cn/"></a>
+        <div class="menu">
+            <ul  class="menu_ul">
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbasy/index.jhtml?competitionId=56&seasonId=1108" >
+                首页
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbaxwgg/index.jhtml?competitionId=56&seasonId=1108" >
+                新闻公告
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbascsg/index.jhtml?competitionId=56&seasonId=1108" >
+                赛程赛果
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbapxb/index.jhtml?competitionId=56&seasonId=1108" >
+                排行榜
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbaqd/index.jhtml?competitionId=56&seasonId=1108" >
+                球队
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbaqy/index.jhtml?competitionId=56&seasonId=1108" >
+                球员
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbasjzx/index.jhtml?competitionId=56&seasonId=1108" >
+                数据中心
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbajctj/index.jhtml?competitionId=56&seasonId=1108" >
+                精彩图集
+            </a></li>
+            <li class="menu_li"><a href="https://www.cba.net.cn/wcbagdzl/index.jhtml?competitionId=56&seasonId=1108" >
+                更多资料
+            </a></li>
+            </ul>
+        </div>
+    </div>
+</div><div id="app">
+    <div id="scrollLoader-container">
+        <div class="main clearfix">
+            <div class="main_title">球员</div>
+            <div class="teamAll_data_content">
+                <div class="teamAll_acronym">
+                    <ul class="teamAll_acronym_ul clearfix">
+                        <li class="teamAll_acronym_li" v-for="item in EnFontArr" :key="item.id" v-text="item.name" :class="{act:item.act}" @click="tabBtenEn(item)"></li>
+                    </ul>
+                </div>
+                <div class="teamAll_div" >
+                    <div class="teamAll_select clearfix">
+                        <span class="select_left clearfix h5">
+                            <span>赛季</span>
+                            <span>
+                                <el-select v-model="theSum" popper-class="select_donw" @change='changeSum' class="creation_container_left_select">
+                                    <el-option v-for="item in valueSum" :key="item.seasonId" :label="item.seasonYear" :value="item.seasonId">      
+                                    </el-option>
+                                </el-select>
+                            </span>
+                        </span>
+                        <span class="select_mid  clearfix h5">
+                            <span>球队</span>
+                            <span>
+                                <el-select v-model="team"  popper-class="select_donw"  @change='changeTeam' class="creation_container_left_select">
+                                    <el-option v-for="item in selcetAllTeam" :key="item.teamId" :label="item.teamName" :value="item.teamId"></el-option>
+                                </el-select>
+                            </span>
+                        </span>  
+                        <span class="select_mid clearfix h5">
+                            <span>位置</span>
+                            <span>
+                                <el-select v-model="positionId"  popper-class="select_donw"  @change='changePosition' class="creation_container_left_select">
+                                    <el-option v-for="item in valuePosition" :key="item.name" :label="item.name" :value="item.id"></el-option>
+                                </el-select>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="team_list_content" :class="{isShow:teamDataList.length}">
+                    <!-- 表格标题部分 -->
+                    <div class="team_list_content_title clearfix">
+                        <div class="personDiv"></div>
+                        <div class="otherDiv clearfix">
+                            <span>身高</span>
+                            <span>体重</span>
+                            <span>生日</span>
+                            <span>国家</span>
+                            <span>球队</span>
+                            <span>球龄</span>
+                        </div>
+                    </div>
+                    <!-- 表格内容部分 -->
+                    <div class="team_list_content_list isShow">
+                        <div class="team_list_content_list_item clearfix" v-for="item in teamDataList">
+                            <p class="personDiv clearfix" @click="getPlayers(item.playerId)">
+                                <span>
+                                    <img v-if="item.playerPhoto" :src="item.playerPhoto" alt=""> 
+                                    <img v-else src="/r/cms/www/default/img/youthsports/wDefault_person.png" alt="">
+                                </span>  
+                                <span>
+                                    <i v-text="item.playerName"></i>
+                                    <i v-text="item.playerNameEn?item.playerNameEn:'-'"></i>
+                                    <i v-text="'#'+item.jersey"></i>
+                                    <i class="hideH5" v-text="item.positionName?item.positionName:'-'"></i>
+                                    <span class="otherInfo showH5">
+                                        <span class="otherInfo_height" v-text="'身高: '+(item.height?(item.height+'CM'):'-')"></span>
+                                        <span class="otherInfo_weight" v-text="'体重: '+(item.weight?(item.weight+'KG'):'-')"></span>  
+                                        <span class="otherInfo_position" v-text="item.positionName?item.positionName:'-'"></span>  
+                                    </span>
+                                </span>
+                            </p>
+                            <p class="otherDiv clearfix">
+                                <span v-text="item.height?(item.height+'CM'):'-'"></span>
+                                <span v-text="item.weight?(item.weight+'KG'):'-'"></span>
+                                <span v-text="item.birthday"></span>
+                                <span v-text="item.countryName"></span>
+                                <span v-text="item.teamName"></span>
+                                <span v-text="item.veteran?item.veteran:'-'"></span>
+                            </p>
+                        </div>
+                        <div :class="isMobile?'loadingH5':''" v-if="bottonLoading"> <!-- add scroll -->
+                            <div class="loaderH5">加载中...</div>
+                        </div>
+                    </div>    
+                </div>
+                <!-- <div class="scend_ranking_kong" :class="{isShow:isNotDataFlag&&!teamDataList.length}">
+                    <img src="/r/cms/www/default/img/youthsports/default_notData.png" alt="">
+                </div> -->
+                <span v-show="!isNotDataFlag" class="moreBtn" :class="{moreLoading: isMoreLoading,isShow: page.pageCount >1}" @click="getPlayerList"><i class="moreBtnFont">更多加载</i></span> 
+                <span v-text="notDataFont" class="notData" :class=" isNotDataFlag ? 'isShow' : '' "></span>
+            </div>
+        </div>
+<!--header头部-->
+
+<div class="footer-wrap">
+    <div class="footer-box">
+        <div class="footer-content">
+            <div class="footer_main clearfix">
+            </div>
+            <div class="copy-right showH5">
+                <span>2006 - 2023 Copyright www.cba.net.cn All Rights Reserved 版权所有</span>
+                <span>京ICP备10036453号 京公网安备11010102004689号</span>
+            </div>
+            <div class="line"></div>
+            <div class="copy-right hideH5">2006 - 2023 Copyright www.cba.net.cn All Rights Reserved 中国篮球协会官方网站 版权所有</div>
+            <div class="copy-right hideH5">京ICP备10036453号 京公网安备11010102004689号</div>
+            <span class="webTitle showH5">中国篮球协会官方网站</span>
+        </div>
+    </div>
+    <img class="footer-bg" src="/r/cms/www/default/img/youthsports/footer_bg.png" alt="">
+</div>
+
+    </div>
+    <!-- 错误消息提示 -->
+    <div class="alert_message" :class="errData.alertMessage?'slide_down':''">
+        <span v-text="errData.errMessage"></span>
+    </div>
+    <!-- 加载loading -->
+    <!-- <div class="box_ngbg" v-show="showLoading" :class="{isShow: showLoading}" >
+        <div class="box_jump">
+            <div class="loading">
+                <img :src="popLoadImage" alt=" "  />
+            </div>
+            <i class="loadShadow"></i>
+            <div class="loading_text">
+                <span>正在载入</span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>             
+    </div> -->
+</div> 
+<!--footer-->
+<script src="/r/cms/www/default/js/youthsports/jquery.js"></script>
+<script type="text/javascript">
+
+var menuArr = [
+    ['/wcbasy/','/wcbazzj/'], //首页
+    ['/wcbaxwgg/'], //新闻公告
+    ['/wcbascsg/','/wcbascsgsqfx/','/wcbascsglsjf/','/wcbascsgsjzb/','/wcbascsgqdsj/','/wcbascsgqysj/','/wcbascsgtlrq/'],  //赛程赛果
+    ['/wcbapxb/','/wcbapxbqysjb/','/wcbapxbqdsjb/','/wcbapxbqyjl/','/wcbapxbqdjl/'], //排行榜
+    ['/wcbaqd/','/wcbaqdqdgk/','/wcbaqdqymd/','/wcbaqdqdsj/','/wcbaqdbstj/'],  //球队
+    ['/wcbaqy/', '/wcbaqyzhsj/', '/wcbaqytl/', '/wcbaqysysj/', '/wcbaqybstj/'],  //球员
+    ['/wcbasjzx/','/wcbasjzxqybstj/', '/wcbasjzxqygjsj/', '/wcbasjzxqdjcsj/', '/wcbasjzxqdbstj/', '/wcbasjzxqdgjsj/', '/wcbasjzxtudtj/'], //数据中心
+    ['/wcbajctj/'],  //精彩图集
+    ['/wcbagdzl/']  //更多资料
+];
+var pathName = location.pathname;
+//  console.log(pathName )
+menuArr.forEach(function(val, index){
+    if(val.length){
+        val.forEach(function(ceil){
+            var pName = ceil + 'index.jhtml'
+            //  console.log(pName,pathName, pName===pathName)
+            if(pName === pathName){
+                //  console.log(index)
+                $('.menu_ul .menu_li:eq(' + index + ')').addClass('active');
+                return
+            }
+        })
+    }
+})
+
+$('.menu_icon').click(function(){
+    if($(this).hasClass('open')){
+        window.isShowPopup(false)
+        $(this).removeClass('open')
+        window.menuMaskOpenFlag = 0
+        $('#mobile .menu').height(0);
+        $('#mobile .menu ul').hide();
+    }else{
+        window.isShowPopup(true)
+        $('.menu-mask').hide();
+        $(this).addClass('open')
+        window.menuMaskOpenFlag = 1
+        $('#mobile .menu').height('calc(100vh - 1.33rem)')
+        setTimeout(function(){
+            $('#mobile .menu ul').show();
+        }, 200)
+    }
+})
+    //   回到顶部效果
+    $(function(){
+        //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+        $(function () {
+            $('#scrollLoader-container').scroll(function(){
+                if ($('#scrollLoader-container').scrollTop()>100){
+                    $("#back-to-top").fadeIn(1000);
+                }
+                else
+                {
+                    $("#back-to-top").fadeOut(1000);
+                }
+            });
+
+            //当点击跳转链接后，回到页面顶部位置
+            $("#back-to-top").click(function(){
+                if ($('#scrollLoader-container').scrollTop()) {
+                    $('#scrollLoader-container').animate({ scrollTop: 0 }, 100);//动画效果
+                    return false;
+                }
+                $('body').animate({ scrollTop: 0 }, 100);
+                return false;
+            });
+        });
+    })
+    // 回到顶部效果 end 
+
+</script>
+<script src="/r/cms/www/default/js/youthsports/vue@2.6.11"></script>
+<script src="/r/cms/www/default/js/youthsports/element-ui@2.9.1.js"></script>
+<script type="text/javascript">
+new Vue({
+    el: '#app',
+    extends: extend,
+    data: function(){
+        return{
+            host: '',
+            EnFontId: '',
+            EnFontArr: ['全部','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
+            theSum:'',
+            valueSum:[],
+            positionId:'',
+            valuePosition:[
+                {name:'全部位置',id:''},
+                {name:'中锋',id:'C'},
+                {name:'前锋',id:'F'},
+                {name:'后卫',id:'G'},
+                {name:'小前锋',id:'SF'},
+                {name:'大前锋',id:'PF'},
+                {name:'组织后卫',id:'PG'},
+                {name:'得分后卫',id:'SG'}
+            ],
+            team: '',
+            selcetAllTeam: [],
+            errData:{
+                alertMessage: false,//消息是否显示状态
+                errMessage:'',//消息弹出内容
+            },
+            parmes:{},
+            popLoadImage: '/r/cms/www/default/img/youthsports/backtball.png',
+            isMoreLoading: false,  //控制 加载更多 loading
+            showLoading:false, //lodaing是否显示
+            isNotDataFlag: false,
+            page:{
+                pageSize: 10,
+                pageCount: 1,
+                total: 0,
+            },
+            notDataFont: '没有更多了',
+            teamDataList: []
+        }
+    },
+    created: function(){
+        var location = window.location
+        this.host = location.protocol + '//' + location.host
+        this.EnFontArr = this.EnFontArr.map(function(val,index){
+            
+            return {
+                name: val,
+                id: val==='全部'?'':val,
+                act: index===0?true:false
+            }
+        })
+        this.EnFontId = this.EnFontArr[0].id
+    },
+    mounted: function(){
+        this.getParmes()
+        this.initMobileScroll(this.getPlayerList, 'bottom') 
+    },
+	methods:{
+        initPlayerList: function(){
+            this.isNotDataFlag = false
+            this.page.pageCount = 1
+            this.teamDataList = []
+            this.bottomDone(true, 'init')
+        },
+        tabBtenEn: function(item){
+            var _this = this
+            this.EnFontArr.forEach(function(val,index){
+                if(item.name === val.name){
+                    val.act = true
+                    _this.EnFontId = val.id
+                    _this.initPlayerList()
+                    _this.getPlayerList()
+                }else{
+                    val.act = false
+                }
+                
+            })
+        },
+        getPlayers: function(playerId){
+            window.location.href= this.host + '/wcbaqyzhsj/index.jhtml?competitionId=' +this.parmes.competitionId+'&seasonId='+this.theSum+'&playerId='+playerId
+        },
+        getParmes: function(){
+            var _this =this
+            var url = window.location.search; //获取url中"?"符后的字串 
+            var theRequest = {}; 
+            if (url.indexOf("?") != -1) { 
+            var str = url.substr(1); 
+            strs = str.split("&"); 
+                for(var i = 0; i < strs.length; i ++) { 
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+                } 
+            } 
+            _this.parmes= theRequest
+            _this.getStage(_this.parmes.seasonId)
+                
+        },
+        //选择赛季	
+        changeSum: function(v){
+            this.theSum = v
+            this.initPlayerList()
+            this.getStage(v)
+        },
+        //选择球队
+        changeTeam: function(v){
+            this.team = v
+            this.initPlayerList()
+            this.getPlayerList()
+        },
+        //选择位置
+        changePosition: function(v){
+            this.positionId = v
+            this.initPlayerList()
+            this.getPlayerList()
+        },
+        getLose: function(){ //消息三秒消失
+            var _this = this
+            setTimeout(function(){
+                _this.errData.alertMessage = false
+            }, 3000);
+            _this.errData.alertMessage = true
+        }, 
+        //阶段数据
+        getStage: function(seasonId){
+            var _this = this
+            _this.showLoading = true
+            $.getJSON(this.apiPort+'/cbamatch/games/matchmenus', {  
+                competitionId : this.parmes.competitionId,
+                seasonId : seasonId
+            })
+            .done(function (res) {
+                    if(res.status == 0){
+                        res.data.seasons.forEach(function(val){
+                            val.seasonId = val.seasonId+''
+                        })
+                        _this.valueSum = res.data.seasons
+                        _this.theSum = seasonId
+                        res.data.teams.unshift({teamName:'全部球队',teamId:''})
+                        res.data.teams.forEach(function(val){
+                            val.teamId = val.teamId+''
+                        })
+                        _this.selcetAllTeam = res.data.teams
+                        _this.team = _this.selcetAllTeam[0].teamId
+                        _this.getPlayerList()
+                        _this.showLoading = false
+                    }else{
+                        _this.showLoading = false
+                        // _this.errData.errMessage = res.message
+                        // _this.getLose()
+                    }
+            })
+            .fail(function(err){
+                    _this.showLoading = false()
+            })
+        
+        },
+        //获取数据
+        getPlayerList: function(){
+            var _this = this;
+            if(_this.page.pageCount === 1){
+
+                _this.showLoading = true
+            }else{
+                _this.isMoreLoading = true
+            }
+            if(_this.isMobile){ 
+                _this.bottonLoading = true
+            }
+            $.getJSON(this.apiPort+'/cbamatch/player/playeritemspage',{
+                seasonId: this.theSum,
+                teamId: this.team,
+                position: this.positionId,
+                playerPyName: this.EnFontId,
+                page: this.page.pageCount,
+                size: this.page.pageSize
+            })
+            .done(function (res) {
+                    if(res.status == 0){
+                        _this.page.total = res.pageMetadata.totalElements
+                        if(_this.page.pageCount === 1){
+                            _this.showLoading = false
+                        }
+                        if(res.data.length){
+                            _this.page.pageCount++
+                            _this.teamDataList = _this.teamDataList.concat(res.data)
+                            if(_this.teamDataList.length < _this.page.total){
+                                _this.notDataFont = '没有更多了'
+                            }
+                        }else{
+                            if(_this.page.pageCount===1){
+                                _this.notDataFont = '暂无数据'
+                            }else{
+                                _this.notDataFont = '-我是有底线的-'
+                            }
+                        }
+                        if(_this.teamDataList.length < _this.page.total){
+                            _this.isMoreLoading = false
+                        }else{
+                            _this.isNotDataFlag = true
+                        }
+                        if(_this.isMobile){ 
+                            if(_this.isNotDataFlag){
+                                _this.bottomDone(true)
+                            }else{
+                                _this.bottomDone()
+                            }
+                        }
+                        
+                    }else{
+                        _this.showLoading = false
+                        if(_this.isMobile){  //add scroll
+                            _this.bottomDone(true)
+                        }
+                        // _this.errData.errMessage = res.message
+                        // _this.getLose()
+                    }	
+                
+            })
+            .fail(function(err){
+                _this.showLoading = false
+                if(_this.isMobile){  //add scroll
+                    _this.bottomDone(true)
+                }
+            })
+        }
+        
+	}
+})
+</script>
+</body>
+</html>
